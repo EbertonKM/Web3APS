@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+//output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Encomenda {
+  id Int @id @default(autoincrement())
+  codRastreio String @unique
+  origem String
+  destino String
+  dataEmissao DateTime @default(now())
+  entregue Boolean
+  observacoes String?
+
+  entregadorId Int?
+  entregador Entregador? @relation(fields: [entregadorId], references: [id], onDelete: SetNull)
+
+  rastreamentos RastreamentoStatus[]
+}
+
+model Entregador {
+  id Int @id @default(autoincrement())
+  nome String
+  telefone String
+  ativo Boolean @default(true)
+
+  encomendas Encomenda[]
+
+  createdAt DateTime? @default(now())
+}
+
+model RastreamentoStatus {
+  id Int @id @default(autoincrement())
+  localizacao String
+  status String
+  dataRegistro DateTime   @default(now())
+
+  encomendaId Int
+  encomenda Encomenda  @relation(fields: [encomendaId], references: [id], onDelete: Cascade)
+}
