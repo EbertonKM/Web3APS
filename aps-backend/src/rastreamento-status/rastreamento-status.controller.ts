@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Query, ParseIntPipe } from '@nestjs/common';
 import { RastreamentoStatusService } from './rastreamento-status.service';
 import { CreateRastreamentoStatusDto } from './dto/create-rastreamento-status.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';

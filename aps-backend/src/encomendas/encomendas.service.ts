@@ -15,7 +15,7 @@ export class EncomendasService {
             take: limit,
             skip: offset,
             orderBy: {
-                dataEmissao: 'desc'
+                id: 'asc'
             }
         })
         return allEncomendas
@@ -35,7 +35,6 @@ export class EncomendasService {
         try {
             const newEncomenda = await this.prismaService.encomenda.create({
                 data: {
-                    codRastreio: createEncomendaDto.codRastreio,
                     origem: createEncomendaDto.origem,
                     destino: createEncomendaDto.destino,
                     entregadorId: createEncomendaDto.entregadorId,

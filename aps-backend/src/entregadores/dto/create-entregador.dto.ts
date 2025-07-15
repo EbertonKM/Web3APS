@@ -8,7 +8,6 @@ export class CreateEntregadorDto {
     readonly nome: string;
 
     @IsString({message: "O número precisa ser um texto"})
-    @Length(11, 11, {message: "Formato do número inválido"})
     @IsNotEmpty({message: "O número não pode ser vazio"})
     readonly telefone: string;
 }
